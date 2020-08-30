@@ -1,0 +1,21 @@
+{% extends 'base1.html' %}
+{% block main %}
+    <h1 class='ml-2'>{{ question.question_text }}</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'vs:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <div class="form-row ml-3">
+            <div class="form-group col-md-6">
+                <strong><label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label></strong>
+            </div>
+            <div class="form-group col-md-6">
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"><br>
+            </div>
+        </div>   
+    {% endfor %}
+    <button class='btn btn-primary' style=" margin-left:700px" type='submit'>submit</button>
+    </form>
+{% endblock %}

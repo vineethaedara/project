@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Registration Form{% endblock %}
+{% block main %}
+
+  <div class="form-group" style="padding:10px 550px 0px 200px;">
+    <form method='POST' action="">
+      {% csrf_token %}
+      <div class="shadow p-3 mb-5 bg-light rounded" >
+        <h1 style="padding-left: 200px;">Registration Form</h1>
+        <div style="padding:10px 10px 10px 10px;">
+          <!--form start-->
+          <form  method='POST'>
+              {% for i in regform %}
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    {{i.label_tag}}
+                  </div>
+                  <div class="form-group col-md-6">
+                    {{i}}
+                  </div>
+                </div>
+                {% for error in i.errors %}
+                  <p style="color:red">{{error}}</p>
+                {% endfor %}
+
+              {% endfor %}
+          </form>   
+              
+              
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Default checkbox
+          </label>
+        </div>
+        <br>
+      <button class='btn btn-success' type='submit'>submit</button>
+    </div>
+    </form>
+    {% for i in messages %}
+      <p>{{i}}</p>
+    {% endfor %}
+    <div class="mt-4">
+      <div class="d-flex justify-content-center mt-3 login_container">
+        Already have an account ?<a href="{% url 'vs:login' %}" class="ml-2">Login</a>
+      </div>
+    </div>
+{% endblock %}

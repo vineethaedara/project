@@ -1,0 +1,17 @@
+{% extends 'base1.html' %}
+{% block main %}
+    <h1>RESULTS</h1>
+    {% for choice in question.choice_set.all %}
+        <div class="form-row" style='margin-left: 50px;'>
+            <div class="form-group col-md-6">
+                {{ choice.choice_text }} 
+            </div>
+            <div class="form-group col-md-6">
+            --> {{ choice.votes }} vote{{ choice.votes|pluralize }}
+            </div>
+        </div>
+    {% endfor %}
+
+    <button class="btn btn-primary" style="margin-left: 100px;"><a href="{% url 'vs:detail' question.id %}" style=" color:white">Vote again?</a></button>
+    <button class="btn btn-primary" style="margin-left: 100px;"><a href="{% url 'vs:index' %}" style=" color:white">Home</a></button>
+{% endblock %}
